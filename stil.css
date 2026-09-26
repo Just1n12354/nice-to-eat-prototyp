@@ -119,6 +119,13 @@
   }
   .s--band h2, .s--band a { color: var(--grund); }
   .leistung dd:empty { display: none; }
+  /* Rechtstexte: ruhige Zwischentitel mit Luft davor */
+  body[data-rechtstext] main h2 { font-size: var(--gr-2); margin-top: var(--a-6); }
+  body[data-rechtstext] main h1 + p, body[data-rechtstext] main p { max-width: 68ch; }
+  .impressum { display: grid; grid-template-columns: max-content 1fr; gap: var(--a-2) var(--a-5); margin: var(--a-4) 0 var(--a-6); }
+  .impressum dt { font-weight: 700; }
+  .impressum dd { margin: 0; overflow-wrap: anywhere; }
+  @media (max-width: 30rem) { .impressum { grid-template-columns: 1fr; gap: 0; } .impressum dd { margin-bottom: var(--a-3); } }
 
   /* Galerie: echtes Mosaik, erstes Bild gross */
   .galerie { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-flow: dense; gap: var(--a-2); margin-top: var(--a-4); }
@@ -279,6 +286,9 @@ h2 { font-size: clamp(2rem, 1.2rem + 3.2vw, 3.6rem); }
 
 /* Kontakt-Kopf ebenfalls schwarz, als Gegenstück zum Stempel */
 .s--laut .aktionen { justify-content: center; }
+
+/* Rechtstexte: Zwischentitel nicht in Plakatgrösse */
+body[data-rechtstext] main h2 { font-size: var(--gr-2); margin-top: var(--a-6); }
 
 }
 
