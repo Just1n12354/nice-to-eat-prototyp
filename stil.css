@@ -1,0 +1,287 @@
+@layer basis, eigenheit;
+@font-face { font-family: "Anton"; src: url("schriften/anton-latin.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+:root {
+  --grund: #ffffff;
+  --text: #141414;
+  --akzent: #b52a1c;
+  --akzent-text: #ffffff;
+  --akzent-dunkel: color-mix(in oklab, #b52a1c 82%, #000);
+  --linie: color-mix(in oklab, #141414 22%, #ffffff);
+  --link: #b52a1c;
+  --fokus: #0b57d0;
+  --schrift-titel: "Anton", Impact, "Arial Narrow", sans-serif;
+  --schrift-text: "Helvetica Neue", Arial, sans-serif;
+  --titel-gewicht: 400;
+  --radius: 0;
+  --gr--1: 0.875rem;
+  --gr-0: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
+  --gr-1: clamp(1.2rem, 1.1rem + 0.45vw, 1.45rem);
+  --gr-2: clamp(1.44rem, 1.25rem + 0.9vw, 1.9rem);
+  --gr-3: clamp(1.7rem, 1.4rem + 1.5vw, 2.6rem);
+  --gr-5: clamp(2.2rem, 1.5rem + 3.4vw, 4.4rem);
+  --rand: clamp(1rem, 4vw, 2.5rem);
+  --breite: 72rem;
+  --a-1: 0.25rem;
+  --a-2: 0.5rem;
+  --a-3: 1rem;
+  --a-4: 1.5rem;
+  --a-5: 2rem;
+  --a-6: 3rem;
+  --a-7: 4.5rem;
+  --abstand-eng: clamp(2rem, 4vw, 3.5rem);
+  --abstand-normal: clamp(3.5rem, 7vw, 6rem);
+  --abstand-weit: clamp(5rem, 11vw, 10rem);
+}
+/* Grundgeruest jeder erzeugten Seite. Bewusst ruhig: linksbuendig, keine Karten,
+   keine Schatten, keine Verlaeufe, keine Animation. Die Eigenheit eines Projekts
+   kommt aus tokens (entscheide.json) und eigenheit.css, nicht von hier. */
+
+@layer basis {
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--grund);
+    color: var(--text);
+    font-family: var(--schrift-text);
+    font-size: var(--gr-0);
+    line-height: 1.55;
+    font-variant-numeric: lining-nums;  /* Telefonnummern und Preise ohne springende Ziffern */
+  }
+  img { display: block; max-width: 100%; height: auto; }
+
+  h1, h2, h3 {
+    font-family: var(--schrift-titel);
+    font-weight: var(--titel-gewicht);
+    line-height: 1.12;
+    letter-spacing: -0.012em;
+    text-wrap: balance;
+    margin: 0 0 var(--a-3);
+  }
+  h1 { font-size: var(--gr-5); line-height: 1.04; letter-spacing: -0.022em; max-width: 22ch; }
+  h2 { font-size: var(--gr-3); max-width: 28ch; }
+  h3 { font-size: var(--gr-1); }
+  p, li, dd { max-width: 68ch; text-wrap: pretty; }
+  p { margin: 0 0 var(--a-3); }
+  ul { padding-left: 1.2em; }
+
+  a { color: var(--link); text-underline-offset: 0.18em; text-decoration-thickness: 1px; }
+  a:hover { text-decoration-thickness: 2px; }
+  :focus-visible { outline: 3px solid var(--fokus); outline-offset: 2px; }
+
+  .skip { position: absolute; left: var(--rand); top: -10rem; background: var(--text); color: var(--grund); padding: var(--a-2) var(--a-3); }
+  .skip:focus { top: var(--a-2); }
+
+  /* Kopf: Marke, echte Seiten, Telefon. Kein Hamburger, kein fixierter Glas-Header. */
+  .kopf {
+    display: flex; flex-wrap: wrap; align-items: center;
+    gap: var(--a-2) var(--a-5);
+    padding: var(--a-3) var(--rand);
+    border-bottom: 1px solid var(--linie);
+  }
+  .marke { margin-right: auto; font-family: var(--schrift-titel); font-weight: var(--titel-gewicht); font-size: var(--gr-1); color: var(--text); text-decoration: none; }
+  .marke { display: inline-flex; align-items: center; gap: var(--a-3); }
+  .marke img { height: 2.75rem; width: auto; }
+  .kopf ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--a-1) var(--a-4); }
+  .kopf nav a { display: inline-block; padding: var(--a-2) 0; color: var(--text); text-decoration: none; }
+  .kopf nav a:hover, .kopf nav a[aria-current="page"] { text-decoration: underline; text-decoration-thickness: 2px; }
+  .kopf .social { display: inline-grid; place-items: center; min-width: 44px; min-height: 44px; padding: 0; }
+  .kopf .social svg { width: 24px; height: 24px; }
+  .kopf ul { align-items: center; }
+  .kopf .tel { display: inline-block; padding: var(--a-2) 0; font-weight: 700; white-space: nowrap; color: var(--text); }
+
+  main { padding-inline: var(--rand); }
+  .s { max-width: var(--breite); margin-inline: auto; padding-block: var(--abstand-normal); }
+  .s--eng { padding-block: var(--abstand-eng); }
+  .s--weit { padding-block: var(--abstand-weit); }
+  .s--laut h2 { font-size: var(--gr-5); }
+
+  .hero { display: grid; gap: var(--a-5); align-items: end; }
+  @media (min-width: 56rem) { .hero--bild { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); } }
+  .hero__text > p:first-of-type { font-size: var(--gr-1); line-height: 1.45; }
+
+  /* Vollbild-Hero: Foto über die ganze Breite, Text darüber auf dunkler Fläche */
+  .s--vollbild { max-width: none; margin-inline: calc(var(--rand) * -1); padding: 0; }
+  .hero--vollbild { position: relative; display: grid; align-items: end; min-height: clamp(30rem, 82vh, 52rem); color: #fff; }
+  .hero__bild { position: absolute; inset: 0; margin: 0; }
+  .hero__bild img { width: 100%; height: 100%; object-fit: cover; }
+  .hero__bild::after { content: ""; position: absolute; inset: 0; background: rgb(0 0 0 / 0.58); }
+  .hero--vollbild .hero__text { position: relative; max-width: var(--breite); width: 100%; margin-inline: auto; padding: var(--a-7) var(--rand); }
+  .hero--vollbild h1 { color: #fff; font-size: clamp(3rem, 1.5rem + 7vw, 8rem); max-width: 16ch; }
+  .hero--vollbild p { color: #fff; }
+  .hero--vollbild .tel-gross { color: #fff; }
+
+  /* Dunkles Band über die ganze Breite: Ränder statt Schatten-Trick (keine Haarlinien) */
+  .s--band {
+    max-width: none; margin-inline: calc(var(--rand) * -1);
+    padding-inline: max(var(--rand), calc((100% - var(--breite)) / 2 + var(--rand)));
+    background: var(--text); color: var(--grund);
+  }
+  .s--band h2, .s--band a { color: var(--grund); }
+  .leistung dd:empty { display: none; }
+
+  /* Galerie: echtes Mosaik, erstes Bild gross */
+  .galerie { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-flow: dense; gap: var(--a-2); margin-top: var(--a-4); }
+  .galerie figure { margin: 0; }
+  .galerie img { width: 100%; height: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+  .galerie figure:first-child { grid-column: span 2; }
+  .galerie__gross { display: block; height: 100%; }
+  .galerie__gross img { transition: opacity var(--dauer, 120ms); }
+  .galerie__gross:hover img { opacity: 0.85; }
+  @media (min-width: 56rem) {
+    .galerie { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .galerie figure:first-child { grid-column: span 2; grid-row: span 2; }
+    .galerie figure:first-child img { aspect-ratio: auto; }
+  }
+
+  .aktionen { display: flex; flex-wrap: wrap; align-items: center; gap: var(--a-3) var(--a-5); margin-top: var(--a-4); }
+  .knopf {
+    display: inline-flex; align-items: center; min-height: 44px;
+    padding: 0.7em 1.1em;
+    background: var(--akzent); color: var(--akzent-text);
+    border: 0; border-radius: var(--radius);
+    font: inherit; font-weight: 700; text-decoration: none; cursor: pointer;
+  }
+  .knopf:hover { background: var(--akzent-dunkel); }
+  .knopf:active { transform: translateY(1px); }
+
+  .leistungen { margin: var(--a-4) 0 0; }
+  .leistung { display: grid; gap: var(--a-1) var(--a-5); padding-block: var(--a-3); border-top: 1px solid var(--linie); }
+  @media (min-width: 48rem) { .leistung { grid-template-columns: minmax(12rem, 1fr) minmax(0, 2fr) auto; } }
+  .leistung dt { font-weight: 700; }
+  .leistung dd { margin: 0; }
+  .preis, .betrag { font-variant-numeric: tabular-nums lining-nums; white-space: nowrap; }
+
+  table { border-collapse: collapse; width: 100%; max-width: 50rem; margin-top: var(--a-3); }
+  th, td { text-align: left; vertical-align: top; padding: var(--a-2) var(--a-4) var(--a-2) 0; border-bottom: 1px solid var(--linie); }
+  thead th { font-weight: 700; border-bottom-color: var(--text); }
+  td.betrag, th.betrag { text-align: right; }
+  @media (max-width: 40rem) {
+    /* Handy: Leistung und Preis in einer Zeile, Einheit und Hinweis darunter */
+    thead { position: absolute; left: -10000px; }
+    tr { display: grid; grid-template-columns: 1fr auto; gap: 0 var(--a-3); padding-block: var(--a-3); border-bottom: 1px solid var(--linie); }
+    th, td { padding: 0; border: 0; }
+    td:nth-child(n+3) { grid-column: 1 / -1; }
+  }
+
+  .person { display: grid; gap: var(--a-5); align-items: start; }
+  @media (min-width: 48rem) { .person--foto { grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); } }
+  figure { margin: 0; }
+  .s--bild figure { max-width: 44rem; }
+  .mit-bild { display: grid; gap: var(--a-5); align-items: center; }
+  .mit-bild figure { max-width: 44rem; }
+  @media (min-width: 56rem) { .mit-bild { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+  figcaption { font-size: var(--gr--1); margin-top: var(--a-2); }
+  blockquote p { margin: 0; }
+  blockquote { margin: 0 0 var(--a-3); font-family: var(--schrift-titel); font-size: var(--gr-2); line-height: 1.3; max-width: 32ch; }
+
+  details { max-width: 50rem; padding-block: var(--a-3); border-bottom: 1px solid var(--linie); }
+  summary { cursor: pointer; font-weight: 700; padding-block: var(--a-1); }
+  details > div { padding-top: var(--a-2); }
+
+  .gemeinden { list-style: none; padding: 0; margin: var(--a-3) 0; display: flex; flex-wrap: wrap; gap: var(--a-1) var(--a-4); }
+
+  address { font-style: normal; }
+  .kontakt { display: grid; gap: var(--a-6); align-items: start; }
+  @media (min-width: 56rem) { .kontakt--formular { grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr); } }
+  .tel-gross { font-size: var(--gr-2); font-weight: 700; }
+  .zeiten { list-style: none; padding: 0; }
+
+  form { display: grid; gap: var(--a-4); max-width: 34rem; }
+  label { display: block; font-weight: 700; margin-bottom: var(--a-1); }
+  .pflicht { font-weight: 400; }
+  input, textarea {
+    width: 100%; min-height: 44px; padding: 0.6em 0.7em;
+    font: inherit; color: var(--text); background: var(--grund);
+    border: 1px solid var(--text); border-radius: var(--radius);
+  }
+  textarea { min-height: 8rem; resize: vertical; }
+  .knopf:disabled { opacity: 0.55; cursor: not-allowed; }
+  .vorschau-hinweis { border-left: 4px solid var(--akzent); padding-left: var(--a-3); }
+  .falle { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+
+  .fuss {
+    display: flex; flex-wrap: wrap; gap: var(--a-4) var(--a-7);
+    padding: var(--a-6) var(--rand);
+    border-top: 1px solid var(--linie);
+    font-size: var(--gr--1);
+  }
+  .fuss ul { list-style: none; margin: 0; padding: 0; }
+  .fuss li { padding-block: var(--a-1); }
+  .fuss a { display: inline-block; min-height: 24px; padding-block: 0.15rem; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition: none !important; animation: none !important; }
+    .knopf:active { transform: none; }
+  }
+}
+@layer eigenheit {
+/* Eigenheit (entscheide.json): Schwarz, Weiss, ein Rot – wie Standbanner und Logo.
+   «zu geil für Diät» steht als roter Stempel im Logo-Oval auf schwarzem Band. */
+
+/* Kopf: Marke wie der Logo-Schriftzug, Telefon als roter Knopf (Burkhalter-Muster) */
+.kopf { background: var(--text); border-bottom: 0; }
+.kopf .marke, .kopf nav a { color: var(--grund); }
+.marke { font-size: var(--gr-3); letter-spacing: 0.01em; line-height: 1; }
+.marke img { height: 64px; width: 64px; }       /* Logo-Button; Quelle ist nur ~150 px gross, nicht grösser zeigen */
+.kopf { padding-block: var(--a-2); }
+.kopf .social:hover { color: #e8432f; }
+.kopf .tel {
+  background: var(--akzent); color: #fff; text-decoration: none;
+  padding: 0.55em 0.9em; font-family: var(--schrift-titel); font-weight: 400;
+  font-size: var(--gr-1); letter-spacing: 0.02em;
+}
+.kopf .tel:hover { background: var(--akzent-dunkel); }
+
+/* Handy: zwei geplante Zeilen – oben Logo, Name, Telefon; darunter Navigation */
+@media (max-width: 40rem) {
+  .kopf { gap: var(--a-2) var(--a-3); padding-block: var(--a-2); }
+  .marke { font-size: var(--gr-2); gap: var(--a-2); }
+  .marke img { height: 44px; width: 44px; }
+  .kopf .tel { order: 2; font-size: var(--gr-0); padding: 0.45em 0.6em; }
+  .kopf nav { order: 3; flex-basis: 100%; border-top: 1px solid rgb(255 255 255 / 0.18); }
+  .kopf ul { gap: 0 var(--a-4); }
+}
+
+/* Titel in Anton, eng gesetzt wie auf dem Banner */
+h1, h2 { letter-spacing: 0.005em; line-height: 1.02; }
+h2 { font-size: clamp(2rem, 1.2rem + 3.2vw, 3.6rem); }
+
+/* Band unter dem Hero: Anfrage */
+.s--band h2 { font-size: clamp(1.8rem, 1rem + 3vw, 3rem); }
+.s--band p { font-size: var(--gr-2); font-family: var(--schrift-titel); letter-spacing: 0.02em; }
+
+/* Angebot wie eine Menütafel: grosse Titel links, Gerichte rechts */
+.leistung { border-top: 2px solid var(--text); padding-block: var(--a-4); }
+.leistung dt { font-family: var(--schrift-titel); font-weight: 400; font-size: var(--gr-3); line-height: 1; text-transform: uppercase; }
+.leistung dd { font-size: var(--gr-1); align-self: center; }
+
+/* Slogan-Stempel: schwarzes Band über die ganze Breite, rotes Oval wie im Logo */
+.s--laut {
+  max-width: none; margin-inline: calc(var(--rand) * -1);
+  padding-inline: max(var(--rand), calc((100% - var(--breite)) / 2 + var(--rand)));
+  background: var(--text); color: var(--grund);
+  text-align: center;
+  overflow: hidden;                            /* gedrehter Stempel darf nie Querscrollen auslösen */
+}
+.s--laut h1, .s--laut p { margin-inline: auto; }
+/* Links auf Schwarz: weiss und unterstrichen (Rot auf Schwarz hätte nur ~2.9:1) */
+.s--laut a, .s--band a { color: #fff; text-decoration-thickness: 2px; }
+.s--laut h2 {
+  display: inline-block; max-width: none;
+  color: #e8432f;                              /* Banner-Rot auf Schwarz aufgehellt, Kontrast > 4.5:1 */
+  border: 0.12em solid #e8432f; border-radius: 50%;
+  padding: 0.35em 0.9em;
+  font-size: clamp(2.6rem, 1rem + 7vw, 7rem);
+  transform: rotate(-6deg);
+}
+.s--laut p { color: var(--grund); margin-inline: auto; margin-top: var(--a-5); }
+
+/* Kontakt-Kopf ebenfalls schwarz, als Gegenstück zum Stempel */
+.s--laut .aktionen { justify-content: center; }
+
+}
+
+/* Prototyp-Hinweis (nur Vorschau-Version) */
+.prototyp{margin:0;padding:.6rem var(--rand);background:#ffd400;color:#111;font-weight:700;text-align:center;font-family:var(--schrift-text)}
+.prototyp a{color:#111;text-decoration-thickness:2px}
