@@ -250,7 +250,7 @@
       "quelle": "Befund 02.10.2026: beide Dateien fehlten",
       "erfasst": "2026-10-02",
       "erledigt": "2026-10-02",
-      "nachweis": "Commit 80cf16d"
+      "nachweis": "Commit a099683 (vor dem Umschreiben der Historie 80cf16d)"
     },
     {
       "id": "NE-23",
@@ -264,6 +264,17 @@
       "erfasst": "2026-10-02",
       "erledigt": "2026-10-02",
       "nachweis": "python werkzeuge/links_pruefen.py: 7 HTML-Dateien, 111 interne Verweise, 0 Fehler (02.10.2026)."
+    },
+    {
+      "id": "NE-24",
+      "titel": "Klone auf mac4air, SarahPC, JustLaptop nach Historie-Umbau pruefen",
+      "projekt": "Nice to Eat",
+      "status": "offen",
+      "prio": "tief",
+      "was": "Die Historie wurde am 02.10.2026 neu geschrieben (Force-Push). Auf diesen Geraeten pruefen, ob ein Klon liegt. Falls ja und sauber ohne eigene Commits: git fetch && git reset --hard origin/main. Eigene Commits erst auf die neue Historie uebertragen. Zuordnung alt -> neu: Bericht/Historie-Zuordnung-2026-10-02.txt.",
+      "warum": "Ein alter Klon wuerde beim naechsten Pull oder Autosync die alte Historie wieder hineinmischen.",
+      "quelle": "Befund 02.10.2026: alle drei laut tailscale status offline (mac4air 24 Tage, SarahPC 4 Tage, JustLaptop 13 Stunden), ssh Timeout",
+      "erfasst": "2026-10-02"
     }
   ]
 }
