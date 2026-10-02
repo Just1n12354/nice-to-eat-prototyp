@@ -1,0 +1,17 @@
+# --- Windows / macOS / Office-Muell ---
+Thumbs.db
+Desktop.ini
+.DS_Store
+~$*
+*.tmp
+
+# --- Altstaende ---
+# V1/ war am 02.10.2026 eine lokale, ungetrackte Kopie des Repo-Inhalts
+# (identisch mit HEAD) und wurde geloescht. Ohne diese Zeile wuerde der
+# stuendliche Autosync eine solche Kopie als Duplikat committen.
+V1/
+
+# --- Python (00_Task/pdf_erzeugen.py) ---
+__pycache__/
+*.pyc
+.ruff_cache/

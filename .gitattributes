@@ -1,0 +1,11 @@
+# Zeilenenden: Text normalisieren, Binaeres in Ruhe lassen
+* text=auto
+
+# Binaerformate nicht als Text behandeln. Mit core.autocrlf=true (Windows)
+# wuerde Git sonst Zeilenenden darin umschreiben und die Dateien zerstoeren.
+*.pdf   binary
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.webp  binary
+*.woff2 binary
