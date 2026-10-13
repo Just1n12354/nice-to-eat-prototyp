@@ -12,7 +12,7 @@
       "projekt": "Nice to Eat",
       "status": "offen",
       "prio": "hoch",
-      "was": "Klaeren, ob beide Personen auf bilder/stand-team-2.jpg einverstanden sind, dass das Foto online ist. Bis dahin das Foto aus index.html und bilder.html nehmen oder ersetzen.",
+      "was": "Klaeren, ob beide Personen auf bilder/stand-team-2.jpg einverstanden sind, dass das Foto online ist. Bis dahin das Foto aus index.html und bilder.html nehmen oder ersetzen. Stand 13.10.2026: Foto aus index.html und bilder.html entfernt, Datei geloescht (in index.html durch essen-apero.jpg ersetzt). Offen bleibt nur, ob es mit Einverstaendnis zurueckkommt.",
       "warum": "Das Foto ist schon jetzt oeffentlich (GitHub Pages, Repo oeffentlich) - noindex verhindert nur die Suchmaschine, nicht den Abruf.",
       "quelle": "was-fehlt.html, Abschnitt Bilder; Befund 02.10.2026: Foto eingebunden in index.html und bilder.html",
       "erfasst": "2026-10-02"
